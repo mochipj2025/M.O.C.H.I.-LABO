@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'M.O.C.H.I. LABO Studio',
 
-  projectId: 'your-project-id', // User needs to replace this
+  projectId: 'mx55qfpe', // User's project ID
   dataset: 'production',
 
   basePath: '/studio',
