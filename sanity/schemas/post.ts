@@ -22,6 +22,26 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'category',
+      title: 'Category (Strategy Pillar)',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Foundation (信頼/マインド)', value: 'foundation' },
+          { title: 'Authority (権威/理論)', value: 'authority' },
+          { title: 'Narrative (共感/物語)', value: 'narrative' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'hook',
+      title: 'Hook (冒頭の拡声器)',
+      type: 'text',
+      description: '冒頭3行で読者を惹きつける結論やフックを記述。',
+      rows: 3,
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
@@ -36,7 +56,7 @@ export default defineType({
     }),
     defineField({
       name: 'body',
-      title: 'Body',
+      title: 'Body (本編)',
       type: 'array',
       of: [
         defineArrayMember({
@@ -47,6 +67,20 @@ export default defineType({
           options: { hotspot: true },
         }),
       ],
+    }),
+    defineField({
+      name: 'ethos',
+      title: 'Ethos (業界への視点/倫理)',
+      type: 'array',
+      description: 'プロとしての覚悟や業界への提言を強調するセクション。',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'ctaText',
+      title: 'CTA Button Text',
+      type: 'string',
+      description: '例：「変態の巣窟へ」「秘密結社の扉を叩く」',
+      initialValue: '変態の巣窟へ',
     }),
   ],
 })

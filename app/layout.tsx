@@ -14,6 +14,15 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
+        <nav className="nav-container">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <img src="/logo.png" alt="MOCHI LABO" style={{ height: '36px', width: 'auto' }} />
+          </div>
+          <div className="nav-links">
+            <a href="/">表紙 <small>[FRONT]</small></a>
+            <a href="/blog">研究録 <small>[ARCHIVE]</small></a>
+          </div>
+        </nav>
         {children}
       </body>
     </html>
