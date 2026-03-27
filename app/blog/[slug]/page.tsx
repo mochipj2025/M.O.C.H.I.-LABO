@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import GatedBody from "./GatedBody";
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const post = await client.fetch(`*[_type == "post" && slug.current == $slug][0] {
     title,

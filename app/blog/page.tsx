@@ -1,6 +1,8 @@
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogIndex() {
   const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc) {
     title,
