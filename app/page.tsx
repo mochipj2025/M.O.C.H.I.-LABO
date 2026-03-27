@@ -33,7 +33,7 @@ export default function Home() {
             
             <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center', justifyContent: 'center' }}>
               <a href="/blog" className="btn-vibe">
-                ARCHIVE ENTRY
+                RESEARCH ARCHIVE [研究録]
               </a>
               <a href="https://line.me" style={{ color: 'var(--ink-black)', textDecoration: 'none', fontWeight: 800, fontSize: '0.75rem', letterSpacing: '0.1em', fontFamily: 'var(--font-mono)', borderBottom: '1px solid currentColor' }}>
                 JOIN_THE_LAB
