@@ -80,7 +80,21 @@ export default defineType({
       title: 'CTA Button Text',
       type: 'string',
       description: '例：「変態の巣窟へ」「秘密結社の扉を叩く」',
-      initialValue: '変態の巣窟へ',
+      initialValue: '変態 of 巣窟へ',
+    }),
+    defineField({
+      name: 'isGated',
+      title: '閲覧制限 (Gated)',
+      type: 'boolean',
+      description: 'ONにするとパスワード入力が必要になります。',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'password',
+      title: '閲覧パスワード',
+      type: 'string',
+      description: '閲覧制限がONの場合にのみ有効です。',
+      hidden: ({ document }) => !document?.isGated,
     }),
   ],
 })

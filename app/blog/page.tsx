@@ -7,7 +7,8 @@ export default async function BlogIndex() {
     slug,
     category,
     hook,
-    publishedAt
+    publishedAt,
+    isGated
   }`);
 
   return (
@@ -29,14 +30,21 @@ export default async function BlogIndex() {
               style={{ textDecoration: 'none' }}
             >
               <div className="glass" style={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', marginBottom: '2.5rem', opacity: 0.5 }}>
-                  RECORD ID: #{String(index + 1).padStart(3, '0')} // CLASS: {post.category || 'ARTISANAL'}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', opacity: 0.5 }}>
+                    RECORD ID: #{String(index + 1).padStart(3, '0')} // CLASS: {post.category || 'ARTISANAL'}
+                  </div>
+                  {post.isGated && (
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.6rem', color: '#ff0000', fontWeight: 800 }}>
+                      [ RESTRICTED_ACCESS ]
+                    </div>
+                  )}
                 </div>
                 <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: 'var(--ink-black)', marginBottom: '2rem', lineHeight: '1.3' }}>{post.title}</h2>
                 <p style={{ fontSize: '1rem', color: 'var(--text-muted)', flexGrow: 1, lineHeight: '1.8' }}>{post.hook}</p>
                 
                 <div style={{ marginTop: '3.5rem', display: 'flex', alignItems: 'center', color: 'var(--ink-black)', fontWeight: 800, fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
-                   {">"} ACCESSING_ANALYSIS... <span style={{ marginLeft: '1rem', fontSize: '1.2rem' }}>→</span>
+                   {post.isGated ? "> DECRYPTING..." : "> ACCESSING_ANALYSIS..."} <span style={{ marginLeft: '1rem', fontSize: '1.2rem' }}>→</span>
                 </div>
               </div>
             </Link>

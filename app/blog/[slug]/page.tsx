@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { PortableText } from "@portabletext/react";
+import GatedBody from "./GatedBody";
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const post = await client.fetch(`*[_type == "post" && slug.current == $slug][0] {
@@ -12,7 +12,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     ethos,
     ctaText,
     publishedAt,
-    category
+    category,
+    isGated,
+    password
   }`, { slug: (await params).slug });
 
   if (!post) return notFound();
@@ -35,20 +37,12 @@ export default async function BlogPost({ params }: { params: { slug: string } })
           </div>
         </header>
 
-        <section className="blog-body" style={{ marginBottom: '12rem', color: 'var(--ink-black)' }}>
-          <PortableText value={post.body} />
-        </section>
-
-        {post.ethos && (
-          <section style={{ padding: '8rem 0', marginBottom: '10rem', borderTop: '4px solid var(--ink-black)' }}>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontWeight: 900, color: 'var(--ink-black)', marginBottom: '4rem', fontSize: '2.8rem', letterSpacing: '-0.02em' }}>
-              ETHOS / 視座の証明
-            </h3>
-            <div style={{ fontSize: '1.25rem', color: 'var(--ink-black)', lineHeight: '2.2' }}>
-               <PortableText value={post.ethos} />
-            </div>
-          </section>
-        )}
+        <GatedBody 
+          body={post.body} 
+          ethos={post.ethos} 
+          isGated={post.isGated} 
+          correctPassword={post.password} 
+        />
 
         <div style={{ textAlign: 'center', padding: '10rem 0', borderTop: '1px solid rgba(0,0,0,0.1)' }}>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', marginBottom: '3rem', opacity: 0.5 }}>AUTHOR_ACCESS_ONLY: MEMBERSHIP_REQUIRED</div>
