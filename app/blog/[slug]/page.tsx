@@ -4,6 +4,7 @@ import Link from "next/link";
 import GatedBody from "./GatedBody";
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const post = await client.fetch(`*[_type == "post" && slug.current == $slug][0] {
@@ -17,7 +18,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     category,
     isGated,
     password
-  }`, { slug: (await params).slug });
+  }`, { slug: params.slug }, { cache: 'no-store' });
 
   if (!post) return notFound();
 

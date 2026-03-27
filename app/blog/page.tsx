@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function BlogIndex() {
   const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc) {
@@ -11,7 +12,7 @@ export default async function BlogIndex() {
     hook,
     publishedAt,
     isGated
-  }`);
+  }`, {}, { cache: 'no-store' });
 
   return (
     <main style={{ minHeight: '100vh', padding: '12rem 2rem 4rem' }}>
